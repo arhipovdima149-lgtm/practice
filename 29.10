@@ -1,0 +1,39 @@
+const products = [
+  { name: "Ноутбук", price: 75000, category: "Техника" },
+  { name: "Мышь", price: 1500, category: "Аксессуары" },
+  { name: "Клавиатура", price: 3500, category: "Аксессуары" },
+  { name: "Монитор", price: 22000, category: "Техника" },
+  { name: "Наушники", price: 5000, category: "Аксессуары" }
+];
+
+console.log("Пункт 1. Прайс-лист:");
+products.forEach(function(item) {
+    console.log(` > ${item.name} — ${item.price} руб.`);
+});
+
+const budgetItems = products.filter(function(item) {
+    return item.price < 5000;
+});
+console.log("Пункт 2. Бюджетные товары (до 5000):", budgetItems.map(i => i.name).join(", "));
+
+const titlesOnly = products.map(function(item) {
+    return item.name;
+});
+console.log(" Пункт 3. Только названия:", titlesOnly);
+
+const firstGadget = products.find(function(item) {
+    return item.category === "Техника";
+});
+console.log("Пункт 4. Найденная техника:", firstGadget.name, `(${firstGadget.price} руб.)`);
+
+const salePrices = products.map(function(item) {
+    let finalPrice = item.price * 0.9;
+    return Number(finalPrice.toFixed(2)); 
+});
+console.log("Пункт 5. Цены со скидкой:", salePrices);
+
+const cheapAccessories = products
+    .filter(item => item.category === "Аксессуары" && item.price <= 4000)
+    .map(item => item.name);
+
+console.log("Доп. задание. Недоступная роскошь (аксессуары до 4000):", cheapAccessories);
