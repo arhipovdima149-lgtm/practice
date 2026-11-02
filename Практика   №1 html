@@ -1,0 +1,43 @@
+ <!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8">
+    <title>Практическая работа</title>
+  </head>
+  <body>
+    <h1 id="main-title">Моя учебная страница</h1>
+    <p class="description">Первый абзац.</p>
+    <p class="description">Второй абзац.</p>
+    <p class="description">Третий абзац.</p>
+
+    <ul>
+      <li>HTML</li>
+      <li>CSS</li>
+      <li>JavaScript</li>
+    </ul>
+
+    <div id="container">
+      <h2>Дополнительная информация</h2>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
+
+
+
+
+const mainTitle = document.getElementById('main-title');
+console.log(mainTitle);
+
+const paragraphs = document.getElementsByTagName('p');
+console.log(paragraphs);
+
+const descriptions = document.getElementsByClassName('description');
+console.log(descriptions);
+
+const container = document.querySelector('#container');
+console.log(container);
+
+const listItems = document.querySelectorAll('ul li');
+console.log(listItems);
