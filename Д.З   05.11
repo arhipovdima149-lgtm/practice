@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Карточка сотрудника</title>
+</head>
+<body>
+
+
+  <button id="btn1">Обычная функция</button>
+  <button id="btn2">Стрелочная функция</button>
+
+  <script>
+   
+    const employee = {
+      name: "Иван Петров",
+      position: "Frontend-разработчик",
+      department: "IT-отдел",
+
+     
+      showCard() {
+        console.log(`Имя: ${this.name}`);
+        console.log(`Должность: ${this.position}`);
+        console.log(`Отдел: ${this.department}`);
+      }
+    };
+
+    employee.showCard();
+
+   
+    const showCard = employee.showCard;
+    console.log("--- Вызов через переменную ---");
+    showCard();
+
+    const boundShowCard = showCard.bind(employee);
+    console.log("--- Вызов через bind ---");
+    boundShowCard();
+
+    function showCardInCity(city) {
+      console.log(`${this.name} работает в городе ${city} (${this.department})`);
+    }
+
+    showCardInCity.call(employee, "Москва");
+
+    showCardInCity.apply(employee, ["Санкт-Петербург"]);
+
+    const btn1 = document.getElementById("btn1");
+    const btn2 = document.getElementById("btn2");
+
+    btn1.addEventListener("click", function (event) {
+      console.log("Обычная функция:");
+      console.log("this === event.currentTarget:", this === event.currentTarget); // true
+      console.log(this); // <button id="btn1"> — this равен элементу
+    });
+
+    btn2.addEventListener("click", (event) => {
+      console.log("Стрелочная функция:");
+      console.log("this === event.currentTarget:", this === event.currentTarget); // false
+      console.log(this); // window — стрелка берёт this снаружи, из глобальной области
+    });
+  </script>
+</body>
+</html>
