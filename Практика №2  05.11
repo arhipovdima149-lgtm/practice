@@ -1,0 +1,112 @@
+Задание 1
+const student1 = {
+  name: "Иван",
+  group: "А-1"
+};
+
+const student2 = {
+  name: "Мария",
+  group: "Б-3"
+};
+
+function showInfo() {
+  console.log(`Имя: ${this.name}, Группа: ${this.group}`);
+}
+
+student1.showInfo = showInfo;
+student2.showInfo = showInfo;
+
+student1.showInfo();
+student2.showInfo();
+
+let savedShowInfo = student1.showInfo;
+savedShowInfo();
+
+
+
+
+Задание 2
+
+const product = { name: 'Ноутбук', price: 1000 };
+
+function showProduct(discount, city) {
+  const finalPrice = this.price - this.price * discount / 100;
+  console.log(`Товар: \${this.name}`);
+  console.log(`Цена со скидкой ${discount}%: ${finalPrice} руб.`);
+  console.log(`Город: \${city}`);
+}
+
+showProduct.call(product, 10, 'Москва');
+showProduct.apply(product, [15, 'Казань']);
+
+
+Задание 3
+
+const employee = {
+  name: 'Дмитрий',
+  position: 'Веб-разработчик',
+  showInfo() {
+    console.log(this.name, this.position);
+  }
+};
+
+employee.showInfo();
+
+const info = employee.showInfo;
+info();
+
+const boundInfo = employee.showInfo.bind(employee);
+boundInfo();
+
+const employee2 = {
+  name: 'Анна',
+  position: 'Дизайнер'
+};
+
+const boundInfo2 = employee.showInfo.bind(employee2);
+boundInfo2();
+
+
+
+
+
+Задание 4
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Практика. Задание 4</title>
+</head>
+<body>
+
+    <button id="regular">Обычная функция</button>
+    <button id="arrow">Стрелочная функция</button>
+
+    <script>
+        const regularBtn = document.getElementById('regular');
+        const arrowBtn = document.getElementById('arrow');
+
+        regularBtn.addEventListener('click', function(event) {
+            console.log('--- Обычная функция ---');
+            console.log('this:', this);
+            console.log('event.currentTarget:', event.currentTarget);
+        });
+
+        arrowBtn.addEventListener('click', (event) => {
+            console.log('--- Стрелочная функция ---');
+            console.log('this:', this);
+            console.log('event.currentTarget:', event.currentTarget);
+        });
+
+        function bindContext(element) {
+            element.addEventListener('click', function(event) {
+                console.log('Контекст привязан:', this, event.currentTarget);
+            }.bind(element));
+        }
+
+        bindContext(document.getElementById('arrow'));
+    </script>
+
+</body>
+</html>
